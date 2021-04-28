@@ -54,16 +54,18 @@
 #' nc_osm <- get_tiles(nc, crop = TRUE, zoom = 6)
 #' plot_tiles(nc_osm)
 #'
-#' # Download esri tiles
-#' fullserver <- paste("https://server.arcgisonline.com/ArcGIS/rest/services",
-#'                     "Specialty/DeLorme_World_Base_Map/MapServer",
-#'                     "tile/{z}/{y}/{x}.jpg", sep = "/")
-#' esri <-  list(src = 'esri', q = fullserver,
-#'               sub = NA, cit = 'Tiles: Esri; Copyright: 2012 DeLorme')
-#' nc_ESRI <- get_tiles(x = nc, provider = esri, crop = TRUE,
-#'                      verbose = TRUE, zoom = 6)
+#' # Download tiles from OSM, no labels
+#' osmnolbl <- list(
+#'   src = 'osmnolabel',
+#'   q = 'https://{s}.tiles.wmflabs.org/osm-no-labels/{z}/{x}/{y}.png',
+#'   sub = c('a','b', 'c'),
+#'   cit = '© OpenStreetMap contributors.'
+#' )
+#' # dowload tiles and compose raster (SpatRaster)
+#' nc_osmnolbl <- get_tiles(x = nc, provider = osmnolbl, crop = TRUE,
+#'                          zoom = 6, verbose = TRUE)
 #' # Plot the tiles
-#' plot_tiles(nc_ESRI)
+#' plot_tiles(nc_osmnolbl)
 get_tiles <- function(x,
                       provider = "OpenStreetMap",
                       zoom,
@@ -72,10 +74,10 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-   # gdal_version is obsolete.
-  if (gdal() < "3.0.4"){
+  # gdal_version is obsolete.
+  if (gdal() < "2.2.3"){
     warning(paste0("Your GDAL version is ",gdal(),
-                   ". You need GDAL >= 3.0.4 to use maptiles."),
+                   ". You need GDAL >= 2.2.3 to use maptiles."),
             call. = FALSE)
     return(invisible(NULL))
   }
@@ -84,14 +86,14 @@ get_tiles <- function(x,
     x <- st_as_sfc(x)
   }
 
-	if(inherits(x, 'SpatRaster')){
-		x <- terra::as.polygons(x, extent = TRUE)
-		x <- terra::project(x, "epsg:4326")
-		x <- terra::ext(x)
-	} else if(inherits(x, 'SpatVector')){
-		x <- terra::project(x, "epsg:4326")
-		x <- terra::ext(x)
-	}
+  if(inherits(x, 'SpatRaster')){
+    x <- terra::as.polygons(x, extent = TRUE)
+    x <- terra::project(x, "epsg:4326")
+    x <- terra::ext(x)
+  } else if(inherits(x, 'SpatVector')){
+    x <- terra::project(x, "epsg:4326")
+    x <- terra::ext(x)
+  }
 
   if(inherits(x, c('sf', 'sfc'))){
     origin_proj <- st_crs(x)$wkt
@@ -168,7 +170,7 @@ get_tiles <- function(x,
   }
 
   # set R, G, B channels, such that plot(rout) will go to plotRGB
-  terra::RGB(rout) <- 1:3
+  RGB(rout)<- 1:3
 
   rout
 }
