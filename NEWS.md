@@ -1,3 +1,11 @@
+# maptiles 0.2.0
+
+## Minor changes
+* Suppress warnings for png files
+* Use sf::gdal_utils to merge tiles, the operation is really faster. 
+
+
+
 # maptiles 0.1.3
 
 ## Minor changes
