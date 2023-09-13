@@ -1,3 +1,27 @@
+# maptiles 0.6.1
+
+## fix
+- deactivate get_tiles() example due to unpredictable download time leading to 
+CRAN note/rejection...
+
+
+
+# maptiles 0.6.0
+
+## fix
+
+- remove various unreliable provider (OpenStreetMap.MapnikBW, HikeBike, 
+Wikimedia, OpenStreetMap.NoLabels...) 
+- update openstreetmap provider url (#23)
+- update stamen provider to stadia (#24)
+- fix forceDownload mechanism (force replace *.tif files) 
+
+## feat
+
+- new function create_provider() to create provider
+- use a better mechanism for apikey
+
+
 # maptiles 0.5.0
 
 ## fix
