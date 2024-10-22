@@ -26,12 +26,12 @@
 #' Providers: \cr
 #' "OpenStreetMap", "OpenStreetMap.DE", "OpenStreetMap.France",
 #' "OpenStreetMap.HOT", "OpenTopoMap", \cr
-#' "Stadia.Stamen.Toner", "Stadia.Stamen.TonerBackground",
-#' "Stadia.Stamen.TonerLines", "Stadia.Stamen.TonerLabels",
-#' "Stadia.Stamen.TonerLite",
-#' "Stadia.Stamen.Watercolor", "Stadia.Stamen.Terrain",
-#' "Stadia.Stamen.TerrainBackground",
-#' "Stadia.Stamen.TerrainLabels", \cr
+#' "Stadia.StamenToner", "Stadia.StamenTonerBackground",
+#' "Stadia.StamenTonerLines", "Stadia.StamenTonerLabels",
+#' "Stadia.StamenTonerLite",
+#' "Stadia.StamenWatercolor", "Stadia.StamenTerrain",
+#' "Stadia.StamenTerrainBackground",
+#' "Stadia.StamenTerrainLabels", \cr
 #' "Esri.WorldStreetMap",
 #' "Esri.WorldTopoMap", "Esri.WorldImagery", "Esri.WorldTerrain",
 #' "Esri.WorldShadedRelief", "Esri.OceanBasemap", "Esri.NatGeoWorldMap",
@@ -49,7 +49,7 @@
 #' "Thunderforest.Neighbourhood"
 #' @export
 #' @return A SpatRaster is returned.
-#' @importFrom terra ext project rast as.polygons 'RGB<-' gdal writeRaster
+#' @importFrom terra ext project rast as.polygons gdal writeRaster
 #' @importFrom sf st_is st_transform st_geometry<- st_buffer st_geometry
 #' st_bbox st_as_sfc st_crs
 #' @importFrom tools file_path_sans_ext
@@ -86,9 +86,6 @@ get_tiles <- function(x,
                       apikey,
                       cachedir,
                       forceDownload = FALSE) {
-  # test gdal version
-  test_gdal_version()
-
   # test input valididy
   test_input(x)
 
@@ -105,22 +102,28 @@ get_tiles <- function(x,
   cachedir <- get_cachedir(cachedir, param$src)
 
   # get file name
-  filename <- get_filename(res$bbox_input, zoom, crop, project, cachedir,
-                           param$q)
+  filename <- get_filename(
+    res$bbox_input, zoom, crop, project, cachedir,
+    param$q
+  )
 
   # display info
   display_infos(verbose, zoom, param$cit, cachedir = cachedir)
 
   # get cached raster if it already exists
   ras <- get_cached_raster(filename, forceDownload, verbose)
-  if (!is.null(ras)) {return(ras)}
+  if (!is.null(ras)) {
+    return(ras)
+  }
 
   # get tile list
   tile_grid <- slippymath::bbox_to_tile_grid(res$bbox_lonlat, zoom)
 
   # download images
-  images <- download_tiles(tile_grid, param, apikey, verbose,
-                           cachedir, forceDownload)
+  images <- download_tiles(
+    tile_grid, param, apikey, verbose,
+    cachedir, forceDownload
+  )
 
   # compose images
   ras <- compose_tiles(tile_grid, images)

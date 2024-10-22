@@ -16,17 +16,6 @@ st_geometry(nc_sf_centro) <- st_centroid(st_geometry(nc_sf_centro))
 nc_SpatVector_centro <- vect(nc_sf_centro)
 
 
-
-
-
-
-
-
-
-# test_gdal_version() ----
-expect_equal(maptiles:::test_gdal_version(), NULL)
-
-
 # test_input() ----
 expect_silent(maptiles:::test_input(nc_sf))
 expect_silent(maptiles:::test_input(nc_sfc))
@@ -121,11 +110,6 @@ osm <- list(src = "OpenStreetMap",
             sub = NA,
             cit = "© OpenStreetMap contributors",
             ext = "png")
-stadia <- list(src = "Stadia.Stamen.Toner",
-               q = "https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png?api_key={apikey}",
-               sub = NA,
-               cit = "© Stadia Maps © Stamen Design © OpenMapTiles © OpenStreetMap contributors",
-               ext = "png")
 expect_identical(maptiles:::get_param("OpenStreetMap"), osm)
 expect_warning(maptiles:::get_param("Stamen.Toner"))
 expect_error(maptiles:::get_param("Esri.Delorme"))
@@ -185,7 +169,8 @@ osmouaich <- create_provider(
 expect_equal(get_credit(osmouaich), "ouaich ouaich yo")
 expect_null(get_credit("Wuwu"))
 
-
+# get_providers ----
+expect_equal(get_providers(), maptiles:::.global_maptiles$providers)
 
 if (home){
   # download_tiles() ----
