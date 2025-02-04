@@ -130,8 +130,9 @@ expect_true(dir.exists(file.path(tempdir(), "pop")))
 # get_filename() ----
 expect_equal(maptiles:::get_filename(bbox = nc_bbox, zoom = 7, crop = TRUE,
                                      project = FALSE,
-                                     cachedir = "/dummy/folder", url = osm$q),
-             "/dummy/folder/cf34f67f2c00b60def2ecea6a61976d7.tif")
+                                     cachedir = "/dummy/folder",
+                                     url = osm$q, retina = TRUE),
+             "/dummy/folder/45ec6961a57873957489067baecf0827.tif")
 
 
 # display_infos() ----
@@ -182,7 +183,7 @@ if (home){
   cachedir <- maptiles:::get_cachedir(src = "OSM")
   images <- maptiles:::download_tiles(tile_grid = tile_grid, param = param,
                                       verbose = FALSE, cachedir = cachedir,
-                                      forceDownload = TRUE)
+                                      forceDownload = TRUE, retina = FALSE)
   expect_inherits(images, "list")
   expect_equal(images[[1]], file.path(cachedir, "OpenStreetMap_6_17_25.png"))
   expect_true(file.exists(file.path(cachedir, "OpenStreetMap_6_17_25.png")))
@@ -191,12 +192,14 @@ if (home){
                                            param = param,
                                            verbose = TRUE,
                                            cachedir = cachedir,
+                                           retina = FALSE,
                                            forceDownload = FALSE))
 
   expect_error(maptiles:::download_tiles(tile_grid = tile_grid,
                                          param = param2,
                                          verbose = FALSE,
                                          cachedir = cachedir,
+                                         retina = FALSE,
                                          forceDownload = TRUE))
 
 
@@ -212,10 +215,10 @@ if (home){
   cachedir2 <- maptiles:::get_cachedir(src = "CartoDBxPos")
   images2 <- maptiles:::download_tiles(tile_grid = tile_grid2, param = param2,
                                       verbose = FALSE, cachedir = cachedir2,
-                                      forceDownload = TRUE)
+                                      forceDownload = TRUE, retina = TRUE)
   ras2 <- maptiles:::compose_tiles(tile_grid2, images2)
   expect_inherits(ras2, "SpatRaster")
-  expect_equal(dim(ras2), c(256, 256, 4))
+  expect_equal(dim(ras2), c(512, 512, 4))
 
 
   # project_and_crop_raster() ----
