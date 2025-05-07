@@ -1,6 +1,6 @@
-7917ea1c7b6d441ba1152b0cf5adae1c *DESCRIPTION
+e80bcc0cfed425c8f01fce3958f88288 *DESCRIPTION
 20f4aee4d384e8692a392013d5208713 *NAMESPACE
-9f6bfa15a3ac877fe9f9b6f20149e6b2 *NEWS.md
+297eefc64d84f89f83740c4e2c837c01 *NEWS.md
 a54f483940cb6d5440db287a32629a7a *R/create_provider.R
 f28eb26cb81f83414b2aeaa559a904f4 *R/get_credit.R
 e74d71e1bad7b981f7811f9576991cc8 *R/get_providers.R
@@ -8,13 +8,13 @@ e74d71e1bad7b981f7811f9576991cc8 *R/get_providers.R
 a622fdd192f6cbe8da8b506b6da586d5 *R/pkg.R
 22975ba0a00aeb7eaae205eec5ad9bea *R/plot_tiles.R
 228a6858492db06b690e1b5424c594e0 *R/providers.R
-0d1bb5509fb347e73e5669dbfd615d20 *R/utils.R
-e0adf1c880c62bb3f664595899d455f5 *README.md
+4ac2a270526f597f57235b39b89e1677 *R/utils.R
+13de1b2a8bf39951b14c7ddeafbc0e6b *README.md
 f6b61559bdb218034c63c8cb31ea0a15 *inst/tinytest/test_maptiles.R
 e89cfeb1ae73b5a61fadec804a3dbc92 *man/create_provider.Rd
-72ddaf1a6ffbaeed096ba5f7855c373f *man/figures/README-example-1.png
-2e110ad7686df9f157367211f5245861 *man/figures/README-example2-1.png
-aed0970f728b8c47fb05da7a8b7fb4b1 *man/figures/README-front.png
+97a525ae7e0c12ae8d0768ba4875428a *man/figures/README-example-1.png
+c1e4c33d511d4ad4789fad510d5b230e *man/figures/README-example2-1.png
+d876f7fdcac79e6a6ed71520e04514ae *man/figures/README-front.png
 96f06a7b9ef69e0505b7f0a5e173b327 *man/figures/logo.png
 a8f07f2c50611d1268e46067cdc0b248 *man/get_credit.Rd
 055750f2567097fb2394a15b1a76a0ba *man/get_providers.Rd
