@@ -10,7 +10,7 @@ nc_sfc <- st_geometry(nc_sf)
 nc_bbox <- st_bbox(nc_sf)
 nc_SpatVector <- vect(nc_sf)
 nc_SpatRaster <- rast(nc_SpatVector)
-nc_SpatExtent <- ext(project(nc_SpatVector, "epsg:4326"))
+nc_SpatExtent <- ext(project(nc_SpatVector, "EPSG:4326"))
 nc_sf_centro <- nc_sf[1, ]
 st_geometry(nc_sf_centro) <- st_centroid(st_geometry(nc_sf_centro))
 nc_SpatVector_centro <- vect(nc_sf_centro)
@@ -177,7 +177,7 @@ if (home){
   # download_tiles() ----
   input <- nc_sf
   res <- maptiles:::get_bbox_and_proj(input)
-  tile_grid <- slippymath::bbox_to_tile_grid(bbox = res$bbox_lonlat, zoom = 6)
+  tile_grid <- maptiles:::bbox_to_tile_grid(bbox = res$bbox_lonlat, zoom = 6)
   param <- param2 <- maptiles:::get_param("OpenStreetMap")
   param2$q <- "ppp"
   cachedir <- maptiles:::get_cachedir(src = "OSM")
@@ -210,7 +210,7 @@ if (home){
 
   input2 <- nc_sf_centro
   res2 <- maptiles:::get_bbox_and_proj(input2)
-  tile_grid2 <- slippymath::bbox_to_tile_grid(bbox = res2$bbox_lonlat, zoom = 4)
+  tile_grid2 <- maptiles:::bbox_to_tile_grid(bbox = res2$bbox_lonlat, zoom = 4)
   param2 <- maptiles:::get_param("CartoDB.PositronOnlyLabels")
   cachedir2 <- maptiles:::get_cachedir(src = "CartoDBxPos")
   images2 <- maptiles:::download_tiles(tile_grid = tile_grid2, param = param2,
