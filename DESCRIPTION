@@ -1,6 +1,6 @@
 Package: maptiles
 Title: Download and Display Map Tiles
-Version: 0.11.0
+Version: 0.12.0
 Authors@R: c(person(given = "Timothée", 
                     family = "Giraud",
                     email = "timothee.giraud@cnrs.fr", 
@@ -33,9 +33,9 @@ Imports: sf, curl, digest, graphics, grDevices, png, terra (>= 1.8-21),
         tools, utils
 Suggests: covr, tinytest
 Encoding: UTF-8
-RoxygenNote: 7.3.3
+Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2025-12-12 16:03:00 UTC; tim
+Packaged: 2026-07-23 14:49:56 UTC; tim
 Author: Timothée Giraud [cre, aut] (ORCID:
     <https://orcid.org/0000-0002-1932-3323>),
   Diego Hernangómez [ctb] (ORCID:
@@ -47,4 +47,4 @@ Author: Timothée Giraud [cre, aut] (ORCID:
     package)
 Maintainer: Timothée Giraud <timothee.giraud@cnrs.fr>
 Repository: CRAN
-Date/Publication: 2025-12-12 16:50:02 UTC
+Date/Publication: 2026-07-23 15:30:02 UTC

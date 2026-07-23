@@ -1,3 +1,10 @@
+# maptiles 0.12.0
+
+## fix 
+- fix issue on autozoom for world polygon #38 (thanks @dieghernan)
+- allow tiles without files extension, we suppose the actual file type is PNG 
+
+
 # maptiles 0.11.0
 
 ## fix
