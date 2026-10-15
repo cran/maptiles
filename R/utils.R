@@ -185,7 +185,7 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
   images <- vector("list", length = nrow(tile_grid$tiles))
   zoom <- tile_grid$zoom
   ext <- param$ext
-  if (ext != ""){
+  if (ext != "") {
     ext <- paste0(".", ext)
   } else {
     ext <- ".png"
@@ -199,6 +199,9 @@ download_tiles <- function(tile_grid, param, apikey, verbose, cachedir,
     if (startsWith(src, "Thunderforest") &&
       Sys.getenv("THUNDERFOREST_MAPS") != "") {
       apikey <- Sys.getenv("THUNDERFOREST_MAPS")
+    }
+    if (startsWith(src, "CartoDB") && Sys.getenv("CARTO_MAPS") != "") {
+      apikey <- Sys.getenv("CARTO_MAPS")
     }
   }
   cpt <- 0

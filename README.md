@@ -3,11 +3,12 @@
 
 # maptiles <img src="man/figures/logo.png" align="right" width="140"/>
 
-[![R-CMD-check](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/riatelab/maptiles/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/riatelab/maptiles/branch/dev/graph/badge.svg?token=R7T2PCTERH)](https://app.codecov.io/github/riatelab/maptiles)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/maptiles)](https://CRAN.R-project.org/package=maptiles)
-![](https://cranlogs.r-pkg.org/badges/maptiles)
+[![CRAN](https://www.r-pkg.org/badges/version-ago/maptiles)](https://cran.r-project.org/package=maptiles)
+[![maptiles status
+badge](https://riatelab.r-universe.dev/maptiles/badges/version)](https://riatelab.r-universe.dev/maptiles)
+![code coverage:
+93%](https://img.shields.io/badge/code_coverage-93%25-green)
+[![downloads](https://cranlogs.r-pkg.org/badges/maptiles?color=brightgreen)](https://cran.r-project.org/package=maptiles)
 
 To create maps from tiles, `maptiles` downloads, composes and displays
 tiles from a large number of providers (e.g. OpenStreetMap, Stadia,
@@ -62,21 +63,21 @@ tiles server and how to cache the original tiles for future use:
 ``` r
 # define the tile server parameters
 osmpos <- create_provider(
-  name = "CARTO.POSITRON",
-  url = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-  sub = c("a", "b", "c", "d"),
-  citation = "© OpenStreetMap contributors © CARTO "
+  name = "OpenStreetMapFrance",
+  url = "https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png",
+  sub = c("a", "b", "c"),
+  citation = "\ua9 OpenStreetMap France | \ua9 OpenStreetMap contributors"
 )
 # dowload tiles and compose raster (SpatRaster)
 nc_osmpos <- get_tiles(
   x = nc, provider = osmpos, crop = TRUE,
-  cachedir = tempdir(), verbose = TRUE, retina = TRUE
+  cachedir = tempdir(), verbose = TRUE
 )
 #> Zoom: 7
-#> Source(s): © OpenStreetMap contributors © CARTO 
-#> Cache directory: /tmp/RtmpInTQ8E/CARTO.POSITRON
+#> Source(s): © OpenStreetMap France | © OpenStreetMap contributors
+#> Cache directory: /tmp/RtmpDPCxIv/OpenStreetMapFrance
 #> 8 tiles
-#> The resulting raster uses high resolution tiles.
+#> High resolution tiles are unavailable on this server.
 # display map
 plot_tiles(nc_osmpos)
 # display credits
@@ -115,7 +116,7 @@ different providers and to have a minimal number of robust and modern
 dependencies. However, depending on the use case, one of following
 packages may better suit your needs:
 
-- [`ceramic`](https://github.com/hypertidy/ceramic)  
+- [`ceramic`](https://github.com/hypertidy/ceramic)
 - [`ggmap`](https://github.com/dkahle/ggmap) (`ggplot2` focused)
 - [`ggspatial`](https://github.com/paleolimbot/ggspatial) (`ggplot2`
   focused, based on `rosm`)
@@ -126,6 +127,17 @@ packages may better suit your needs:
 - [`RgoogleMaps`](https://github.com/markusloecher/rgooglemaps) (google)
 - [`rosm`](https://github.com/paleolimbot/rosm)
 - …
+
+## Community Guidelines
+
+One can contribute to the package through pull requests and report
+issues or ask questions
+[here](https://github.com/riatelab/maptiles/issues). See the
+[CONTRIBUTING.md](https://github.com/riatelab/maptiles/blob/main/CONTRIBUTING.md)
+file for detailed instructions on how to contribute. This project uses
+[conventional
+commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/) and
+[semantic versioning](https://semver.org/).
 
 ## Note
 
